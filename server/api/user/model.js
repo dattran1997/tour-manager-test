@@ -9,5 +9,23 @@ const TourSchema = new mongoose.Schema({
     image:{type:String, required:true}
 });
 
+tourRoute.post('/', async function(req,res){
+    console.log(req.body);
+    const tour = req.body;
+
+    try{
+        const newTour =  await TourModel.create(tour);
+        res.json({
+            success:true
+        })
+    }catch(error){
+        res.json({
+            success:false,
+            message:error
+        })
+    }
+    
+});
+
 const TourModel = mongoose.model("Tour", TourSchema);
 module.exports = TourModel;
